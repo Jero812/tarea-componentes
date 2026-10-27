@@ -1,5 +1,4 @@
 
-
 "use client";
 
 interface ToggleSwitchProps {
@@ -16,28 +15,17 @@ export default function ToggleSwitch({
   disabled = false,
 }: ToggleSwitchProps) {
   return (
-    <div className="flex items-center justify-between gap-4 border border-[#303030] bg-[#151515] p-4">
-      <span className="text-sm font-medium text-white">
-        {label}
-      </span>
+    <label className="flex items-center justify-between gap-4 rounded-box border border-base-300 bg-base-200 p-4">
+      <span className="text-sm font-medium">{label}</span>
 
-      <button
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        aria-label={label}
+      <input
+        type="checkbox"
+        className="toggle toggle-primary"
+        checked={checked}
         disabled={disabled}
-        onClick={() => onChange(!checked)}
-        className={`relative h-7 w-14 shrink-0 rounded-full transition-colors duration-200 ${
-          checked ? "bg-[#5451EB]" : "bg-[#444444]"
-        } disabled:cursor-not-allowed disabled:opacity-50`}
-      >
-        <span
-          className={`absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
-            checked ? "translate-x-7" : "translate-x-0"
-          }`}
-        />
-      </button>
-    </div>
+        onChange={(event) => onChange(event.target.checked)}
+        aria-label={label}
+      />
+    </label>
   );
 }

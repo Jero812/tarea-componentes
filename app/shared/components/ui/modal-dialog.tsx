@@ -26,48 +26,35 @@ export default function ModalDialog({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+      className="modal modal-open"
+      role="presentation"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <section
+      <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        className="w-full max-w-md border border-[#383838] bg-[#151515] p-6 shadow-2xl"
+        className="modal-box border border-base-300"
       >
-        <div className="mb-4 flex items-start justify-between gap-4">
-          <h2
-            id="modal-title"
-            className="text-xl font-bold text-white"
-          >
-            {title}
-          </h2>
-
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Cerrar ventana"
-            className="text-xl text-gray-400 hover:text-[#E7F05A]"
-          >
-            ×
-          </button>
-        </div>
+        <h2 id="modal-title" className="text-xl font-bold">
+          {title}
+        </h2>
 
         {description && (
-          <p className="mb-4 text-sm leading-6 text-gray-400">
+          <p className="py-4 text-base-content/70">
             {description}
           </p>
         )}
 
         {children}
 
-        <div className="mt-6 flex justify-end gap-3">
+        <div className="modal-action">
           <button
             type="button"
             onClick={onClose}
-            className="border border-[#383838] px-4 py-2 text-sm text-white hover:border-[#E7F05A]"
+            className="btn btn-ghost"
           >
             Cancelar
           </button>
@@ -76,13 +63,14 @@ export default function ModalDialog({
             <button
               type="button"
               onClick={onConfirm}
-              className="bg-[#E7F05A] px-4 py-2 text-sm font-semibold text-black hover:bg-[#D8E448]"
+              className="btn btn-primary"
             >
               {confirmLabel}
             </button>
           )}
         </div>
-      </section>
+      </div>
     </div>
   );
 }
+

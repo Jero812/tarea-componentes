@@ -1,5 +1,4 @@
 
-
 interface UserAvatarProps {
   name: string;
   imageUrl?: string;
@@ -8,9 +7,9 @@ interface UserAvatarProps {
 }
 
 const sizes = {
-  sm: "h-9 w-9 text-xs",
-  md: "h-11 w-11 text-sm",
-  lg: "h-14 w-14 text-base",
+  sm: "w-8",
+  md: "w-11",
+  lg: "w-14",
 };
 
 export default function UserAvatar({
@@ -28,26 +27,21 @@ export default function UserAvatar({
     .toUpperCase();
 
   return (
-    <div className="inline-flex min-w-0 items-center gap-3">
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt={name}
-          className={`${sizes[size]} shrink-0 rounded-full border border-[#5451EB] object-cover`}
-        />
-      ) : (
+    <div className="flex items-center gap-3">
+      <div className={`avatar ${imageUrl ? "" : "placeholder"}`}>
         <div
-          aria-label={name}
-          className={`${sizes[size]} flex shrink-0 items-center justify-center rounded-full border border-[#5451EB] bg-[#24213D] font-bold text-[#E7F05A]`}
+          className={`${sizes[size]} aspect-square flex items-center justify-center rounded-full border border-primary bg-base-300 text-base-content`}
         >
-          {initials}
+          {imageUrl ? (
+            <img src={imageUrl} alt={name} />
+          ) : (
+            <span className="font-bold text-primary">{initials}</span>
+          )}
         </div>
-      )}
+      </div>
 
       {showName && (
-        <span className="text-sm font-medium text-white">
-          {name}
-        </span>
+        <span className="text-sm font-medium">{name}</span>
       )}
     </div>
   );

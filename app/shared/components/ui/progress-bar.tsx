@@ -8,9 +8,9 @@ interface ProgressBarProps {
 }
 
 const variants = {
-  primary: "bg-[#5451EB]",
-  success: "bg-[#6DDB98]",
-  warning: "bg-[#E7F05A]",
+  primary: "progress-primary",
+  success: "progress-success",
+  warning: "progress-warning",
 };
 
 export default function ProgressBar({
@@ -21,37 +21,30 @@ export default function ProgressBar({
   variant = "primary",
 }: ProgressBarProps) {
   const percentage =
-    max > 0 ? Math.min(100, Math.max(0, (value / max) * 100)) : 0;
+    max > 0
+      ? Math.min(100, Math.max(0, (value / max) * 100))
+      : 0;
 
   return (
     <div className="w-full">
       <div className="mb-2 flex items-center justify-between gap-3">
         {label && (
-          <span className="text-sm font-medium text-white">
-            {label}
-          </span>
+          <span className="text-sm font-medium">{label}</span>
         )}
 
         {showPercentage && (
-          <span className="text-sm text-gray-400">
+          <span className="text-sm opacity-70">
             {Math.round(percentage)}%
           </span>
         )}
       </div>
 
-      <div
-        role="progressbar"
+      <progress
+        className={`progress w-full ${variants[variant]}`}
+        value={percentage}
+        max={100}
         aria-label={label ?? "Progreso"}
-        aria-valuenow={Math.round(percentage)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        className="h-2 w-full overflow-hidden bg-[#303030]"
-      >
-        <div
-          className={`h-full transition-all duration-300 ${variants[variant]}`}
-          style={{ width: `${percentage}%` }}
-        />
-      </div>
+      />
     </div>
   );
 }
